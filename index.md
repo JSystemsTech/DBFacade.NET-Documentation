@@ -12,8 +12,8 @@ A [Bootstrap 4](https://getbootstrap.com/) start up project for [Github Pages](h
 
 ## Setup Guide
 ```C#
-  function test(){
-    console.log('test');
+  public string GetTestValue(){
+    return "This is a Test";
   }
   ```
 ### Fork this repository
