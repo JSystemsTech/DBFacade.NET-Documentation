@@ -11,7 +11,11 @@ A [Bootstrap 4](https://getbootstrap.com/) start up project for [Github Pages](h
 * Supports all features of Github Pages and Jekyll.
 
 ## Setup Guide
-
+```
+  function test(){
+    console.log('test');
+  }
+  ```
 ### Fork this repository
 
 [Go to this repository page on Github](https://github.com/nicolas-van/bootstrap-4-github-pages) and click the `Fork` button on the top right of the page.
