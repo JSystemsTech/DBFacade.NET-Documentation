@@ -11,7 +11,7 @@ A [Bootstrap 4](https://getbootstrap.com/) start up project for [Github Pages](h
 * Supports all features of Github Pages and Jekyll.
 
 ## Setup Guide
-```C#
+```csharp
   public string GetTestValue(){
     return "This is a Test";
   }
