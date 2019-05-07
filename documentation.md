@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Documentation
+sections:
+  GettingStarted: This is the introduction
 ---
-
+{{ page.sections['GettingStarted'] | textilize }}
 ## Getting Started
 
 ## Components
