@@ -2,14 +2,7 @@
 layout: page
 title: Documentation
 ---
-{% assign sections = site.sections | sort: 'order' %}
-{% for section in sections %}
-  {% if section.include != null %}
-    {% include {{ section.include }} %}
-  {% else %}
-    {% include sections/default.html %}
-  {% endif %}
-{% endfor %}
+
 ## Getting Started
 
 ## Components
