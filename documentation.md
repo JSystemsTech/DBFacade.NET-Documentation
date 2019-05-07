@@ -1,10 +1,8 @@
 ---
 layout: page
 title: Documentation
-sections:
-  GettingStarted: GettingStarted
 ---
-{% include Documentation/{{page.sections['GettingStarted'] | textilize}}.html %}
+{% include Documentation/GettingStarted.html %}
 ## Getting Started
 
 ## Components
