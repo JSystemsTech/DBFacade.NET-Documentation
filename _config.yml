@@ -31,7 +31,10 @@ plugins:
 
 # A list of the pages to display in the navigation bar
 header_pages:
-  
+
+# A list of collections
+collections:
+- sections
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
