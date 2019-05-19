@@ -3,11 +3,6 @@ layout: page
 title: Documentation
 ---
 
-## Getting Started
-
-## Components
-## Database Connection
-## DbMethods
 
 ## Data Models
 
