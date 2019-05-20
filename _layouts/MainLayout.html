@@ -18,7 +18,7 @@
                     {% assign active_class = " active" %}
                     {% endif %}
                     {% assign id_base = section.title | slugify %}
-                    <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base }}Tab" data-toggle="list" href="#{{ id_base }}Tab" role="tab" aria-controls="{{ id_base }}Content">{{ section.title }}</a>
+                    <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base }}Tab" data-toggle="list" href="#{{ id_base }}Content" role="tab" aria-controls="{{ id_base }}Content">{{ section.title }}</a>
                     {% endif %}
                     {% endfor %}
                 </div>                
