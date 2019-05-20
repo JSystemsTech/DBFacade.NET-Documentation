@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+<body>
+
+    {%- include header.html -%}
+    {% assign sections = site.sections | sort: 'order' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group">
+                    {% for section in sections %}
+                    {% if section.include != null %}
+                    <a href="#{{ section.title | slugify }}" class="list-group-item list-group-item-action">
+                        {{ section.title }}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>                
+            </div>
+            <div class="col-8">
+                {% for section in sections %}
+                {% if section.include != null %}
+                {% include {{ section.include }} %}
+                {% else %}
+                {% include sections/default.html %}
+                {% endif %}
+                {% endfor %}
+                {{ content }}
+            </div>
+        </div>
+    </div>   
+
+    {%- include footer.html -%}
+
+</body>
+
+</html>
