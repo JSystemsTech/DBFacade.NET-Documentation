@@ -2,7 +2,42 @@
     <div class="row">
         <div class="col-12">
             <h1>{{ section.title }}</h1>
+            {% if site[section.nested_content] != null %}
+            {% assign sections = site[section.nested_content] | sort: 'order' %}
+
+            <div class="list-group">
+                {% for nested_section in sections %}
+                {% if nested_section.include != null %}
+                {% assign active_class = "" %}
+                {% if nested_section.order == 1 %}
+                {% assign active_class = " active" %}
+                {% endif %}
+                {% assign id_base = nested_section.title | slugify %}
+                <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base }}Tab" data-toggle="list" href="#{{ id_base }}Content" role="tab" aria-controls="{{ id_base }}Content">{{ nested_section.title }}</a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="tab-content" id="PageContent">
+                {% for nested_section in sections %}
+
+                {% if nested_section.include != null %}
+                {% assign id_base = nested_section.title | slugify %}
+                {% assign active_class = "" %}
+                {% if nested_section.order == 1 %}
+                {% assign active_class = " show active" %}
+                {% endif %}
+                <div class="tab-pane fade{{ active_class }}" id="{{ id_base }}Content" role="tabpanel" aria-labelledby="{{ id_base }}Tab">
+                    {% include {{ nested_section.include }} %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+
+            {% else %}
             {{ section.content }}
+            {% endif %}
+
         </div>
     </div>
 </section>

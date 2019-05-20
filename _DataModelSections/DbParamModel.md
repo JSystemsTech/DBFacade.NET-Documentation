@@ -1,7 +1,7 @@
 ---
 title: DbDataModels
 # Set the display order for this section
-order: 7
+order: 2
 # Specify the layout for this section
 include: sections/h2.html
 ---
