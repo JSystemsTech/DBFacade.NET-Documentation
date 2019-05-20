@@ -5,19 +5,22 @@
             <h1>{{ section.title }}</h1>
             {% if site[section.nested_content] != null %}
             {% assign sections = site[section.nested_content] | sort: 'order' %}
-
-            <div class="list-group">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
                 {% for nested_section in sections %}
                 {% if nested_section.include != null %}
                 {% assign active_class = "" %}
+                {% assign aria_selected = "false" %}
                 {% if nested_section.order == 1 %}
                 {% assign active_class = " active" %}
+                {% assign aria_selected = "true" %}
                 {% endif %}
                 {% assign id_base = nested_section.title | slugify %}
-                <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base_root }}{{ id_base }}Tab" data-toggle="list" href="#{{ id_base_root }}{{ id_base }}Content" role="tab" aria-controls="{{ id_base_root }}{{ id_base }}Content">{{ nested_section.title }}</a>
+                <li class="nav-item">
+                    <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base_root }}{{ id_base }}Tab" data-toggle="tab" href="#{{ id_base_root }}{{ id_base }}Content" role="tab" aria-controls="{{ id_base_root }}{{ id_base }}Content" aria-selected="{{aria_selected}}">{{ nested_section.title }}</a>
+                </li>
                 {% endif %}
                 {% endfor %}
-            </div>
+            </ul>
             <div class="tab-content" id="{{ id_base_root }}Content">
                 {% for nested_section in sections %}
 
