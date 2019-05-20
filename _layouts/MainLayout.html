@@ -13,24 +13,39 @@
                 <div class="list-group">
                     {% for section in sections %}
                     {% if section.include != null %}
-                    <a href="#{{ section.title | slugify }}" class="list-group-item list-group-item-action">
+                    {% assign activ_class = "" %}
+                    {% if section.order == 1 %}
+                    {% assign activ_class = " active" %}
+                    {% endif %}
+                    {% assign id_base = section.title | slugify %}
+                    <a href="#{{ id_base }}" class="list-group-item list-group-item-action{{ activ_class }}">
                         {{ section.title }}
                     </a>
+                    <a class="list-group-item list-group-item-action active" id="{{ id_base }}Tab" data-toggle="list" href="#{{ id_base }}Tab" role="tab" aria-controls="{{ id_base }}Content">{{ section.title }}</a>
                     {% endif %}
                     {% endfor %}
                 </div>                
             </div>
             <div class="col-8">
-                {% for section in sections %}
-                {% if section.include != null %}
-                {% include {{ section.include }} %}
-                {% else %}
-                {% include sections/default.html %}
-                {% endif %}
-                {% endfor %}
-                {{ content }}
+                <div class="tab-content" id="PageContent">
+                    {% for section in sections %}
+
+                    {% if section.include != null %}
+                    {% assign id_base = section.title | slugify %}
+                    {% assign activ_class = "" %}
+                    {% if section.order == 1 %}
+                    {% assign activ_class = " show active" %}
+                    {% endif %}
+                    <div class="tab-pane fade{{ activ_class }}" id="{{ id_base }}Content" role="tabpanel" aria-labelledby="{{ id_base }}Tab">
+                        {% include {{ section.include }} %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                    
+                    {{ content }}
+                </div>
             </div>
-        </div>
     </div>   
 
     {%- include footer.html -%}
