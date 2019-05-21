@@ -5,7 +5,7 @@
             {% if site[section.nested_content] != null %}
             {% assign sections = site[section.nested_content] | sort: 'order' %}
 
-            {% if section.nested_content_type == tabs %}
+            {% if section.nested_content_type == 'tabs' %}
             {% include TabsLayout.html %}
             {% else %}
             {% include TOCLayout.html %}
