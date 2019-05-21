@@ -5,9 +5,9 @@
         {% if site[section.nested_content] != null %}
         {% assign sections = site[section.nested_content] | sort: 'order' %}
 
-        {% if section.nested_content_type == tabs %}
+        {% if section.nested_content_type != null %}
         {% include TabsLayout.html %}
-        {% elseif section.nested_content_type == TOC% %}
+        {% else %}
         {% include TOCLayout.html %}
         {% endif}
         {% elseif  %}
