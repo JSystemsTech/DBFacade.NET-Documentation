@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	{% for nested_section in sections %}
+	{% assign active_class = "" %}
+	{% assign aria_selected = "false" %}
+	{% if nested_section.order == 1 %}
+	{% assign active_class = " active" %}
+	{% assign aria_selected = "true" %}
+	{% endif %}
+	{% assign id_base = nested_section.title | slugify %}
+	<li class="nav-item">
+		<a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base_root }}{{ id_base }}Tab" data-toggle="tab" href="#{{ id_base_root }}{{ id_base }}Content" role="tab" aria-controls="{{ id_base_root }}{{ id_base }}Content" aria-selected="{{aria_selected}}">{{ nested_section.title }}</a>
+	</li>
+	{% endfor %}
+</ul>
+<div class="tab-content" id="{{ id_base_root }}Content">
+	{% for nested_section in sections %}
+
+	{% assign id_base = nested_section.title | slugify %}
+	{% assign active_class = "" %}
+	{% if nested_section.order == 1 %}
+	{% assign active_class = " show active" %}
+	{% endif %}
+	<div class="tab-pane fade{{ active_class }}" id="{{ id_base_root }}{{ id_base }}Content" role="tabpanel" aria-labelledby="{{ id_base_root }}{{ id_base }}Tab">
+		{% include NestedTab.html %}
+	</div>
+	{% endfor %}
+</div>

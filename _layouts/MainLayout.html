@@ -34,7 +34,7 @@
                     {% assign active_class = " show active" %}
                     {% endif %}
                     <div class="tab-pane fade{{ active_class }}" id="{{ id_base }}Content" role="tabpanel" aria-labelledby="{{ id_base }}Tab">
-                        {% include {{ section.include }} %}
+                        {% include SideMenuSection.html %}
                     </div>
                     {% endif %}
                     {% endfor %}
