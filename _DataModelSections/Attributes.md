@@ -1,8 +1,8 @@
 ---
-title: Validation
+title: Attributes
 # Set the display order for this section
-order: 4
+order: 2
 # Specify the layout for this section
 include: NestedTab.html
 ---
-This is Validation Section
+This is Attributes Section
