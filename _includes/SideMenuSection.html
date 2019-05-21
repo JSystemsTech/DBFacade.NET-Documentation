@@ -3,7 +3,7 @@
     <div class="col-12">
         <h1>{{ section.title }}</h1>
         {% if site[section.nested_content] != null %}
-        {% assign sections = site[section.nested_content] | sort: 'order' %}
+        {% assign nested_sections = site[section.nested_content] | sort: 'order' %}
         <div>type: {{ section.nested_content_type }}</div>
         {% if section.nested_content_type != null %}
         {% include TabsLayout.html %}

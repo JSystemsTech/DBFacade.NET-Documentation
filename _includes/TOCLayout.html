@@ -1,5 +1,5 @@
 <ul class="nav flex-column" id="{{ id_base }}TOC">
-    {% for nested_section in sections %}
+    {% for nested_section in nested_sections %}
 
 
     {% assign active_class = "" %}
@@ -14,7 +14,7 @@
     </li>
     {% endfor %}
 </ul>
-    {% for nested_section in sections %}
+    {% for nested_section in nested_sections %}
 
     {% assign id_base = '_' | append: nested_section.order %}
 	{% assign id_content_base = id_base_root | append: id_base %}
