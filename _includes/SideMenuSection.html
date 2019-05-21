@@ -1,17 +1,17 @@
 {% assign id_base_root = section.title | slugify %}
 <div id="{{ id_base_root }}" class="row">
-        <div class="col-12">
-            <h1>{{ section.title }}</h1>
-            {% if site[section.nested_content] != null %}
-            {% assign sections = site[section.nested_content] | sort: 'order' %}
+    <div class="col-12">
+        <h1>{{ section.title }}</h1>
+        {% if site[section.nested_content] != null %}
+        {% assign sections = site[section.nested_content] | sort: 'order' %}
 
-            {% if section.nested_content_type == tabs %}
-            {% include TabsLayout.html %}
-            {% else %}
-            {% include TOCLayout.html %}
-            {% endif %}
-            {% else %}
-            {{ section.content }}
-            {% endif %}
+        {% if section.nested_content_type == tabs %}
+        {% include TabsLayout.html %}
+        {% elseif section.nested_content_type == TOC% %}
+        {% include TOCLayout.html %}
+        {% endif}
+        {% elseif  %}
+        {{ section.content }}
+        {% endif %}
     </div>
 </div>
