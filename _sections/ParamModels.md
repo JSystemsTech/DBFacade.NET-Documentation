@@ -4,6 +4,6 @@ title: Param Models
 order: 6
 # Specify the layout for this section
 nested_content: DbParamModelSections
-nested_content_Type: tabs
+nestedContentType: tabs
 ---
 This is The Param Models Section

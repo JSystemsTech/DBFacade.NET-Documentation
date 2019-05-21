@@ -4,6 +4,6 @@ title: Data Models
 order: 5
 # Specify the layout for this section
 nested_content: DbDataModelSections
-nested_content_Type: tabs
+nestedContentType: tabs
 ---
 This is The Data Models Section

@@ -4,8 +4,8 @@
         <h1>{{ section.title }}</h1>
         {% if site[section.nested_content] != null %}
         {% assign nested_sections = site[section.nested_content] | sort: 'order' %}
-        <div>type: {{ section.nested_content_type }}</div>
-        {% if section.nested_content_type != null %}
+        <div>type: {{ section.nestedContentType }}</div>
+        {% if section.nestedContentType != null %}
         {% include TabsLayout.html %}
         {% else %}
         {% include TOCLayout.html %}
