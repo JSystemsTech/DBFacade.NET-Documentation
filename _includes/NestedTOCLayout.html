@@ -1,43 +1,34 @@
-<ul class="nav flex-column">
-    <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-</ul>
+{% if site[nested_content.nested_content] != null %}
+ {% assign TOCSections = site[nested_content.nested_content] | sort: 'order' %}
 <ul class="nav nav-tabs" id="myTab" role="tablist">
-    {% for nested_section in sections %}
+    {% for content_section in TOCSections %}
 
 
     {% assign active_class = "" %}
     {% assign aria_selected = "false" %}
-    {% if nested_section.order == 1 %}
+    {% if content_section.order == 1 %}
     {% assign active_class = " active" %}
     {% endif %}
-    {% assign id_base = nested_section.title | slugify %}
+    {% assign id = _{{content_section.order}} %}
+    {% assign id_toc_base = {{ id_content_base }}{{id}} %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_base_root }}{{ id_base }}Tab" href="#{{ id_base_root }}{{ id_base }}{{ nested_section.title | slugify }}">{{ nested_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}">{{ nested_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
-    {% for nested_section in sections %}
+    {% for content_section in TOCSections %}
 
-    {% assign id_base = nested_section.title | slugify %}
+    {% assign id = _{{content_section.order}} %}
+    {% assign id_toc_base = {{ id_content_base }}{{id}} %}
     {% assign active_class = "" %}
     {% if nested_section.order == 1 %}
     {% assign active_class = " show active" %}
     {% endif %}
-    <div class="row" id="{{ id_base_root }}{{ id_base }}">
-        <div class="col-12">
-            <h2>{{ nested_section.title }}</h2>
-            {{ nested_section.content }}
-        </div>                
+<div class="row" id="{{ id_toc_base }}">
+    <div class="col-12">
+        <h2>{{ nested_section.title }}</h2>
+        {{ nested_section.content }}
     </div>
+</div>
     {% endfor %}
+{% endif %}

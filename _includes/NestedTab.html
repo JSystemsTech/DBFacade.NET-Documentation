@@ -1,8 +1,11 @@
-<div id="{{ nested_section.title | slugify }}">
-    <div class="row">
-        <div class="col-12">
-            <h2>{{ nested_section.title }}</h2>
-            {{ nested_section.content }}
-        </div>
+<div class="row">
+    <div class="col-12">
+        <h2>{{ nested_section.title }}</h2>
+        {{ nested_section.content }}
+        {% if section.nested_content != null %}
+
+        {% include NestedTabsLayout.html %}
+        {% endif %}
+
     </div>
-</div>
+    </div>

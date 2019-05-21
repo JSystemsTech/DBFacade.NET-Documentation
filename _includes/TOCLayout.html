@@ -21,23 +21,25 @@
     {% if nested_section.order == 1 %}
     {% assign active_class = " active" %}
     {% endif %}
-    {% assign id_base = nested_section.title | slugify %}
+    {% assign id_base = _{{nested_section.order}} %}
+    {% assign id_content_base = {{ id_base_root }}{{ id_base }} %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_base_root }}{{ id_base }}Tab" href="#{{ id_base_root }}{{ id_base }}{{ nested_section.title | slugify }}">{{ nested_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_content_base }}Tab" href="#{{ id_base_root }}{{ id_base }}{{ nested_section.title | slugify }}">{{ nested_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
     {% for nested_section in sections %}
 
-    {% assign id_base = nested_section.title | slugify %}
+    {% assign id_base = _{{nested_section.order}} %}
+    {% assign id_content_base = {{ id_base_root }}{{ id_base }} %}
     {% assign active_class = "" %}
     {% if nested_section.order == 1 %}
     {% assign active_class = " show active" %}
     {% endif %}
-    <div class="row" id="{{ id_base_root }}{{ id_base }}">
-        <div class="col-12">
-            <h2>{{ nested_section.title }}</h2>
-            {{ nested_section.content }}
-        </div>                
+<div class="row" id="{{ id_content_base }}">
+    <div class="col-12">
+        <h2>{{ nested_section.title }}</h2>
+        {{ nested_section.content }}
     </div>
+</div>
     {% endfor %}
