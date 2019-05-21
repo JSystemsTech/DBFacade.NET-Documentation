@@ -9,17 +9,16 @@
     {% if content_section.order == 1 %}
     {% assign active_class = " active" %}
     {% endif %}
-    {% assign id = _{{content_section.order}} %}
-    {% assign id_toc_base = {{ id_content_base }}{{id}} %}
+    {% assign id = '_' | append: content_section.order %}
+    {% assign id_toc_base = id_content_base | append: id %}
     <li class="nav-item">
         <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}">{{ nested_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
     {% for content_section in TOCSections %}
-
-    {% assign id = _{{content_section.order}} %}
-    {% assign id_toc_base = {{ id_content_base }}{{id}} %}
+{% assign id = '_' | append: content_section.order %}
+	{% assign id_toc_base = id_content_base | append: id %}
     {% assign active_class = "" %}
     {% if nested_section.order == 1 %}
     {% assign active_class = " show active" %}
