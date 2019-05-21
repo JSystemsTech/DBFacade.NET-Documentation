@@ -2,7 +2,7 @@
     <div class="col-12">
         <h2>{{ nested_section.title }}</h2>
         {{ nested_section.content }}
-        {% if section.nested_content != null %}
+        {% if nested_section.nested_content != null %}
 
         {% include NestedTabsLayout.html %}
         {% endif %}
