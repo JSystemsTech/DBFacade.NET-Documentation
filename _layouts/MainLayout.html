@@ -26,7 +26,7 @@
                 <div class="tab-content" id="PageContent">
                     {% for section in sections %}
 
-                    {% assign id_base = section.title | slugify %}
+                    {% assign id_menu_base = section.title | slugify %}
                     {% assign active_class = "" %}
                     {% if section.order == 1 %}
                     {% assign active_class = " show active" %}
