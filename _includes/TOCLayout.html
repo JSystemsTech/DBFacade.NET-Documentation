@@ -10,7 +10,7 @@
     {% assign id_base = '_' | append: nested_section.order %}
     {% assign id_content_base = id_base_root | append: id_base %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_content_base }}Tab" href="#{{ id_base_root }}{{ id_base }}{{ nested_section.title | slugify }}">{{ nested_section.order }}. {{ nested_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_content_base }}Tab" href="#{{ id_content_base }}">{{ nested_section.order }}. {{ nested_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
