@@ -12,14 +12,13 @@
             <div class="col-4">
                 <div class="list-group">
                     {% for section in sections %}
-                    {% if section.include != null %}
                     {% assign active_class = "" %}
                     {% if section.order == 1 %}
                     {% assign active_class = " active" %}
                     {% endif %}
                     {% assign id_base = section.title | slugify %}
                     <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_base }}Tab" data-toggle="list" href="#{{ id_base }}Content" role="tab" aria-controls="{{ id_base }}Content">{{ section.title }}</a>
-                    {% endif %}
+                    
                     {% endfor %}
                 </div>                
             </div>
@@ -36,8 +35,7 @@
                         {% include SideMenuSection.html %}
                     </div>
                     {% endfor %}
-                </div>
-                    
+                </div>                    
                     {{ content }}
                 </div>
             </div>
