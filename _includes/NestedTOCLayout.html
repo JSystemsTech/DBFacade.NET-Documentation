@@ -12,21 +12,32 @@
     {% assign id = '_' | append: content_section.order %}
     {% assign id_toc_base = id_content_base | append: id %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}">{{ content_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}Content">{{ content_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
+<div class="accordion" id="{{ id_content_base }}Accordion">
     {% for content_section in NestedTOCSections %}
-{% assign id = '_' | append: content_section.order %}
-	{% assign id_toc_base = id_content_base | append: id %}
+    {% assign id = '_' | append: content_section.order %}
+    {% assign id_toc_base = id_content_base | append: id %}
     {% assign active_class = "" %}
     {% if content_section.order == 1 %}
     {% assign active_class = " show active" %}
     {% endif %}
-<div class="row" id="{{ id_toc_base }}">
-    <div class="col-12">
-        <h3>{{ content_section.title }}</h3>
-        {{ content_section.content }}
+    <div class="card">
+        <div class="card-header" id="{{ id_toc_base }}Heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{ id_toc_base }}Content" aria-expanded="true" aria-controls="{{ id_toc_base }}Content">
+                    {{ content_section.title }}
+                </button>
+            </h2>
+        </div>
+
+        <div id="{{ id_toc_base }}Content" class="collapse show" aria-labelledby="{{ id_toc_base }}Heading" data-parent="#accordionExample">
+            <div class="card-body">
+                {{ content_section.content }}
+            </div>
+        </div>
     </div>
-</div>
     {% endfor %}
+</div>
