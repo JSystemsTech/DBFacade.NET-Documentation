@@ -1,8 +1,7 @@
-
- {% assign TOCSections = site[nested_content.nested_content] | sort: 'order' %}
+ {% assign NestedTOCSections = site[nested_content.nested_content] | sort: 'order' %}
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
-    {% for content_section in TOCSections %}
+    {% for content_section in NestedTOCSections %}
 
 
     {% assign active_class = "" %}
@@ -13,21 +12,21 @@
     {% assign id = '_' | append: content_section.order %}
     {% assign id_toc_base = id_content_base | append: id %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}">{{ nested_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}">{{ content_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
-    {% for content_section in TOCSections %}
+    {% for content_section in NestedTOCSections %}
 {% assign id = '_' | append: content_section.order %}
 	{% assign id_toc_base = id_content_base | append: id %}
     {% assign active_class = "" %}
-    {% if nested_section.order == 1 %}
+    {% if content_section.order == 1 %}
     {% assign active_class = " show active" %}
     {% endif %}
 <div class="row" id="{{ id_toc_base }}">
     <div class="col-12">
-        <h3>{{ nested_section.title }}</h3>
-        {{ nested_section.content }}
+        <h3>{{ content_section.title }}</h3>
+        {{ content_section.content }}
     </div>
 </div>
     {% endfor %}
