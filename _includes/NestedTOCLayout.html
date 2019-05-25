@@ -1,4 +1,4 @@
- {% assign NestedTOCSections = site[nested_content.nested_content] | sort: 'order' %}
+ {% assign NestedTOCSections = site[nested_section.nested_content] | sort: 'order' %}
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     {% for content_section in NestedTOCSections %}
