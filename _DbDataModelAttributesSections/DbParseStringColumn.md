@@ -1,7 +1,7 @@
 ---
-title: DbDateStringColumn
+title: DbParseStringColumn
 # Set the display order for this section
-order: 2
+order: 6
 # Specify the layout for this section
 ---
-DbDateStringColumn
+DbParseStringColumn
