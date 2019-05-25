@@ -12,7 +12,7 @@
     {% assign id = '_' | append: content_section.order %}
     {% assign id_toc_base = id_content_base | append: id %}
     <li class="nav-item">
-        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}Content">{{ content_section.title }}</a>
+        <a class="nav-link{{ active_class}}" id="{{ id_toc_base }}Tab" href="#{{ id_toc_base }}Heading">{{ content_section.title }}</a>
     </li>
     {% endfor %}
 </ul>
