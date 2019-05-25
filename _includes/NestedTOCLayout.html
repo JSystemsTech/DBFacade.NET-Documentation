@@ -26,11 +26,11 @@
     {% endif %}
     <div class="card">
         <div class="card-header" id="{{ id_toc_base }}Heading">
-            <h2 class="mb-0">
+            <h3 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{ id_toc_base }}Content" aria-expanded="true" aria-controls="{{ id_toc_base }}Content">
                     {{ content_section.title }}
                 </button>
-            </h2>
+            </h3>
         </div>
 
         <div id="{{ id_toc_base }}Content" class="collapse" aria-labelledby="{{ id_toc_base }}Heading" data-parent="#{{ id_content_base }}Accordion">
