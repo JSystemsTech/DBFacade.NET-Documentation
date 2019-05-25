@@ -4,6 +4,6 @@ title: Attributes
 order: 2
 # Specify the layout for this section
 include: NestedTab.html
-nested_content: DbDataModelAttributes
+nested_content: DbDataModelAttributesSections
 ---
 This is Attributes Section

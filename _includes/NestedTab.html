@@ -3,7 +3,7 @@
         <h2>{{ nested_section.title }}</h2>
         {{ nested_section.content }}
         {% if nested_section.nested_content != null %}
-        
+        {% assign NestedTOCSections = site[nested_section.nested_content] | sort: 'order' %}
         {% include NestedTOCLayout.html %}
         {% endif %}
 
