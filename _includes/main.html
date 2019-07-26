@@ -1,0 +1,45 @@
+{% assign ContentTopLayerSections = site.[PageName] | default: site.sections | sort: 'order' %}
+{% assign ContentTopLayerSectionsLength = ContentTopLayerSections | size %}
+
+{% if ContentTopLayerSectionsLength > 0  %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-content" id="PageContent">
+                {% for TopLayerSection in ContentTopLayerSections %}
+                {% assign TopLayerSectionName = PageName | append: TopLayerSection.title |remove: " "%}
+                {% if site[TopLayerSectionName] %}
+                {% assign SubMenuSections = site[TopLayerSectionName] | default: site.sections | sort: 'title' %}
+                {% for SubMenuSection in SubMenuSections %}
+                {% assign  ContentSection = SubMenuSection %}
+
+                {% assign SubMenuLayerSectionName = TopLayerSectionName | append: SubMenuSection.title |remove: " " %}
+                {% assign  ContentSectionName = SubMenuLayerSectionName %}
+                <div class="tab-pane fade" id="{{ SubMenuLayerSectionName }}Content" role="tabpanel" aria-labelledby="{{ SubMenuLayerSectionName }}Tab">
+                    {% include SideMenuSection.html %}
+                </div>
+                {% endfor %}
+                {% else %}
+                {% assign  ContentSection = TopLayerSection %}
+                {% assign  ContentSectionName = TopLayerSectionName %}
+                {% assign  ActiveClass = ""%}
+                {% if TopLayerSection.defaultsection ==true %}
+                {% assign  ActiveClass = "active show"%}
+                {% endif %}
+                <div class="tab-pane fade {{ActiveClass}}" id="{{ TopLayerSectionName }}Content" role="tabpanel" aria-labelledby="{{ TopLayerSectionName }}Tab">
+                    {% include SideMenuSection.html %}
+                </div>
+
+                {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% else  %}
+{{content}}
+{% endif  %}

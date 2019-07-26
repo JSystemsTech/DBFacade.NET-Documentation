@@ -1,48 +1,16 @@
+{% assign SiteTitle = site.title | escape %}
+{% assign PageName = page.title | escape %}
+{% assign PageNameClass = PageName | downcase|append: '-page'  %}
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" class="{{PageNameClass}}">
 
-  {%- include head.html -%}
 
-<body>
-
-    {%- include header.html -%}
-    {% assign sections = site.sections | sort: 'order' %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-auto">
-                <div class="list-group">
-                    {% for section in sections %}
-                    {% assign active_class = "" %}
-                    {% if section.order == 1 %}
-                    {% assign active_class = " active" %}
-                    {% endif %}
-                    {% assign id_menu_base = section.title | slugify %}
-                    <a class="list-group-item list-group-item-action{{ active_class}}" id="{{ id_menu_base }}Tab" data-toggle="list" href="#{{ id_menu_base }}Content" role="tab" aria-controls="{{ id_menu_base }}Content">{{ section.title }}</a>
-                    
-                    {% endfor %}
-                </div>                
-            </div>
-            <div class="col-auto flex-fill">
-                <div class="tab-content" id="PageContent">
-                    {% for section in sections %}
-
-                    {% assign id_menu_base = section.title | slugify %}
-                    {% assign active_class = "" %}
-                    {% if section.order == 1 %}
-                    {% assign active_class = " show active" %}
-                    {% endif %}
-                    <div class="tab-pane fade{{ active_class }}" id="{{ id_menu_base }}Content" role="tabpanel" aria-labelledby="{{ id_menu_base }}Tab">
-                        {% include SideMenuSection.html %}
-                    </div>
-                    {% endfor %}
-                </div>                    
-                    {{ content }}
-                </div>
-            </div>
-    </div>   
-
-    {%- include footer.html -%}
-
+{%- include head.html -%}
+{%- include preScripts.html -%}
+<body class="fixed-sn">
+    <header>{%- include header.html -%}</header>
+    <main>{%- include main.html -%}</main>
+    <footer>{%- include footer.html -%}</footer>
 </body>
-
+{%- include postScripts.html -%}
 </html>

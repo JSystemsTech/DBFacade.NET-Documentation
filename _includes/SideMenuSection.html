@@ -1,17 +1,78 @@
-{% assign id_base_root = section.title | slugify %}
-<div id="{{ id_base_root }}" class="row">
+{% assign UseSideMenu = page.sidemenu | default: false %}
+{% assign SectionListIdBase = "now" | date: "%N"  %}
+{% assign SectionListId = "SectionMenu" | append: SectionListIdBase %}
+<div class="row">
     <div class="col-12">
-        <h1>{{ section.title }}</h1>
-        {% if site[section.nested_content] != null %}
-        {% assign nested_sections = site[section.nested_content] | sort: 'order' %}
-        
-        {% if section.nestedContentType != null %}
-        {% include TabsLayout.html %}
-        {% else %}
-        {% include TOCLayout.html %}
-        {% endif}
-        {% elseif  %}
-        {{ section.content }}
-        {% endif %}
+        <h1>
+
+            <div class="title-gradient text-white">
+                {% if UseSideMenu == true %}
+                <span>
+                    <button class="btn btn-link text-white" data-toggle="modal" data-target="#SideMenu"><i class="fa fa-bars fa-2x text-white"></i><span class="sr-only">Menu</span></button>
+                </span>
+                {% endif %}
+                <span>{{ ContentSection.title }}</span>
+            </div>
+
+        </h1>
     </div>
+    {% if site[ContentSection.nested_content] != null %}
+    {% assign nested_sections = site[ContentSection.nested_content] | sort: 'order' %}
+
+
+
+
+    <div class="order-3 order-md-2 col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content tab-content">
+        {% for nested_section in nested_sections %}
+        {% assign NestedContentSectionName = ContentSectionName | append: nested_section.title |remove: " "%}
+
+        {% assign active_class = "" %}
+        {% if nested_section.order == 1 %}
+        {% assign active_class = " show active" %}
+        {% endif %}
+        <div class="tab-pane fade{{ active_class }}" id="{{ NestedContentSectionName }}Content" role="tabpanel" aria-labelledby="{{ NestedContentSectionName }}Tab">
+            {% include NestedTab.html %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="order-2 order-md-3 col-12 col-md-3 col-xl-2 bd-sidebar">
+        <ul class="list-group list-group-flush" role="tablist" id="{{SectionListId}}">
+            {% for nested_section in nested_sections %}
+            {% assign NestedContentSectionName = ContentSectionName | append: nested_section.title |remove: " "%}
+            {% assign active_class = "" %}
+            {% assign aria_selected = "false" %}
+            {% if nested_section.order == 1 %}
+            {% assign active_class = " active" %}
+            {% assign aria_selected = "true" %}
+            {% endif %}
+            <li class="nav-item list-group-item p-0">
+                <a class="list-group-item list-group-item-action {{ active_class}}" id="{{ NestedContentSectionName }}Tab" data-toggle="tab" href="#{{ NestedContentSectionName }}Content" role="tab" aria-controls="{{ NestedContentSectionName }}Content" aria-selected="{{aria_selected}}">{{ nested_section.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var SectionList = $('#{{SectionListId}}');
+            var Tab = $('#' + SectionList.closest('.tab-pane').attr('aria-labelledby'));
+            Tab.on('shown.bs.tab', function () {
+                $.WebUtils.SideMenuScroll(SectionList);
+            });
+            
+        });
+    </script>
+    {% else %}
+
+    <div class="col-12">
+        {{ ContentSection.content }}
+    </div>
+
+
+    {% endif %}
 </div>
+
+
+
+

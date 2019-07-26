@@ -4,77 +4,57 @@ title: DbColumn
 order: 1
 # Specify the layout for this section
 ---
-DbColumn
-#### Basic
-```csharp
-public class MyDbDataModel{
-	[DbColumn("SomeDbColumnName")]
-	public string SomeDbColumnProperty {get; private set;}
-}    
-```
-#### Bind to Specific DbMethod
-```csharp
-public class MyDbDataModel{
+{% include Documentation/DataModels/Variables.md %}
 
-	[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName2")]
-	public string SomeDbColumnProperty {get; private set;}
+{% assign ClassName = 'DBColumn' %}
 
-}  
-```
-#### Basic Delimited Value
-```csharp
-public class MyDbDataModel{
+{% assign Constructor1 = ParamName %}
+{% assign Constructor2 = ParamDBMethodType | append: Delim1 | append: ParamName %}
+{% assign Constructor3 = ParamName | append: Delim1 | append: ParamDefaultValue %}
+{% assign Constructor4 = ParamDBMethodType | append: Delim1 | append: ParamName | append: Delim1 | append: ParamDefaultValue %}
 
-	[DbColumn("SomeDbColumnName", ',')]
-	public string[] SomeDbColumnProperty {get; private set;}
+{% assign ConstructorsStr = Constructor1 | append: Delim2 | append: Constructor2 | append: Delim2 | append: Constructor3| append: Delim2 | append: Constructor4 %}
+{% assign Constructors =  ConstructorsStr | split: Delim2 %}
 
-}  
-```
-#### Delimited Value bound to Specific DbMethod
-```csharp
-public class MyDbDataModel{
+{% assign Constructor1Info = ParamNameInfo %}
+{% assign Constructor2Info = ParamDBMethodTypeInfo | append: Delim2 | append: ParamNameInfo %}
+{% assign Constructor3Info = ParamNameInfo | append: Delim2 | append: ParamDefaultValueInfo %}
+{% assign Constructor4Info = ParamDBMethodTypeInfo | append: Delim2 | append: ParamNameInfo | append: Delim2 | append: ParamDefaultValueInfo %}
 
-	[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName", ',')]
-	public string[] SomeDbColumnProperty {get; private set;}
+{% assign ConstructorsInfoStr = Constructor1Info | append: Delim3 | append: Constructor2Info | append: Delim3 | append: Constructor3Info| append: Delim3 | append: Constructor4Info %}
+{% assign ConstructorsInfo =  ConstructorsInfoStr | split: Delim3 %}
 
-}  
-```
+{% assign Constructor1Notes = 'Basic constructor' %}
+{% assign Constructor2Notes = 'Basic constructor with DbMethod specific binding' %}
+{% assign Constructor3Notes = 'Basic constructor with default value' %}
+{% assign Constructor4Notes = 'Basic constructor with DbMethod specific binding and default value' %}
 
-#### Basic With Default value
-default value must be of same type as property type
-```csharp
-public class MyDbDataModel{
-	[DbColumn("SomeDbColumnName","some default value")]
-	public string SomeDbColumnProperty {get; private set;}
-}    
-```
-#### Bind to Specific DbMethod With Default value
-default value must be of same type as property type
-```csharp
-public class MyDbDataModel{
+{% assign ConstructorsNotesStr = Constructor1Notes | append: Delim1 | append: Constructor2Notes | append: Delim1 | append: Constructor3Notes| append: Delim1 | append: Constructor4Notes %}
+{% assign ConstructorsNotes =  ConstructorsNotesStr | split: Delim1 %}
 
-	[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName","some default value")]
-	public string SomeDbColumnProperty {get; private set;}
+{%- capture code1 -%}
+[DbColumn("SomeDbColumnName")]
+public string SomeDbColumnProperty {get; private set;}	
+{%- endcapture -%}
 
-}  
-```
-#### Basic Delimited Value With Default value
-default value must be of same type as property type
-```csharp
-public class MyDbDataModel{
+{%- capture code2 -%}
+[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName")]
+public string SomeDbColumnProperty {get; private set;}	
+{%- endcapture -%}
 
-	[DbColumn("SomeDbColumnName","some default value", ',')]
-	public string[] SomeDbColumnProperty {get; private set;}
+{%- capture code3 -%}
+[DbColumn("SomeDbColumnName", "my default value")]
+public string SomeDbColumnProperty {get; private set;}	
+{%- endcapture -%}
 
-}  
-```
-#### Delimited Value bound to Specific DbMethod With Default value
-default value must be of same type as property type
-```csharp
-public class MyDbDataModel{
+{%- capture code4 -%}
+[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName", "my default value")]
+public string SomeDbColumnProperty {get; private set;}	
+{%- endcapture -%}
 
-	[DbColumn(typeof(MyDbMethod.SomeMethod), "SomeDbColumnName","some default value", ',')]
-	public string[] SomeDbColumnProperty {get; private set;}
+{% assign CodeStr = code1 | append: DelimCode | append: code2 | append: DelimCode | append: code3 | append: DelimCode | append: code4 %}
+{% assign CodeList =  CodeStr | split: DelimCode %}
 
-}  
-```
+{% include Class.md ClassName=ClassName Constructors=Constructors ConstructorsInfo=ConstructorsInfo ConstructorsNotes=ConstructorsNotes CodeList=CodeList %}
+
+

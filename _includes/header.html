@@ -1,37 +1,111 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+{% assign UseSideMenu = page.sidemenu | default: false %}
+<!--Navbar-->
+<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar navbar-dark blue-gradient">
 
-    {%- assign page_paths = site.header_pages -%}
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Navbar brand -->
+    
+    <a class="navbar-brand" href="#">{{ SiteTitle }}</a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            {%- assign page_paths = site.header_pages -%}
             {%- for path in page_paths -%}
             {%- assign my_page = site.pages | where: "path", path | first -%}
-            {%- if my_page.title -%}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
-            </li>
+            {%- assign ActiveClass = "" -%}
+
+
+            {%- if my_page.title == PageName -%}
+                {%- assign ActiveClass = "active" -%}
             {%- endif -%}
+            <li class="nav-item {{ActiveClass}}">
+                <a class="nav-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}<span class="sr-only">(current)</span></a>              
+            </li>
             {% endfor -%}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Documentation
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ "/" | relative_url }}documentation">Docs</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ site.github.repository_url }}">Fork me on Github</a>
-            </li>
+
         </ul>
+        <!-- Links -->
+
+        <form class="form-inline">
+            <div class="md-form my-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </form>
     </div>
-  </div>
+    <!-- Collapsible content -->
+
 </nav>
+{% if UseSideMenu == true %}
+<div class="modal fade left" id="SideMenu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+    <div class="modal-dialog modal-full-height modal-left" role="document">
+
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">{{PageName}} Menu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <!--Accordion wrapper-->
+                <ul class="accordion md-accordion list-group list-group-flush" id="SideMenu" role="tablist" aria-multiselectable="true">
+                    
+                    {% assign SideMenuTopLayerSections = site.[PageName] | default: site.sections | sort: 'order' %}
+                    {% for TopLayerSection in SideMenuTopLayerSections %}
+                    {% assign TopLayerSectionName = PageName | append: TopLayerSection.title |remove: " "%}
+
+                    <li class="card list-group-item p-0">
+                        {% if site[TopLayerSectionName] %}
+
+                        <div class="card-header" role="tab" id="SideMenuItemHeader{{TopLayerSectionName}}">
+                            <a data-toggle="collapse" data-parent="#SideMenu" href="#SideMenuItemContent{{TopLayerSectionName}}" aria-expanded="false"
+                               aria-controls="SideMenuItemContent{{TopLayerSectionName}}">
+                                <h5 class="mb-0">
+                                    {{TopLayerSection.title}}<i class="fas fa-angle-down rotate-icon"></i>
+                                </h5>
+                            </a>
+                        </div>
+                        <div id="SideMenuItemContent{{TopLayerSectionName}}" class="collapse" role="tabpanel" aria-labelledby="SideMenuItemHeader{{TopLayerSectionName}}"
+                             data-parent="#SideMenu">
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush">
+                                    {% assign SideMenuSubMenuSections = site[TopLayerSectionName] | default: site.sections | sort: 'title' %}
+                                    {% for SubMenuSection in SideMenuSubMenuSections %}
+                                    {% assign SubMenuLayerSectionName = TopLayerSectionName | append: SubMenuSection.title |remove: " "% %}
+                                    <li class="list-group-item p-0">
+                                        <a data-dismiss="modal" class="list-group-item list-group-item-action" id="{{SubMenuLayerSectionName}}Tab" data-toggle="list" href="#{{SubMenuLayerSectionName}}Content" role="tab" aria-controls="{{SubMenuLayerSectionName}}Content">{{ SubMenuSection.title }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="card-header">
+                            <a data-dismiss="modal" id="{{TopLayerSectionName}}Tab" data-toggle="list" href="#{{TopLayerSectionName}}Content" role="tab" aria-controls="{{TopLayerSectionName}}Content">
+                                <h5 class="mb-0">
+                                    {{TopLayerSection.title}}
+                                </h5>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+

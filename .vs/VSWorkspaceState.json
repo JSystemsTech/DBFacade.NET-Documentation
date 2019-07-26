@@ -1,11 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
+    "\\assets\\javascript",
+    "\\assets\\javascript\\mdb\\modules",
+    "\\_DbDataModelAttributesSections",
     "\\_includes",
-    "\\_includes\\sections",
+    "\\_includes\\Documentation",
+    "\\_includes\\Documentation\\DataModels",
     "\\_layouts",
-    "\\_sections"
+    "\\_sass"
   ],
-  "SelectedNode": "\\_sections\\GettingStarted (2).md",
+  "SelectedNode": "\\_DbDataModelAttributesSections\\DbEnumerableColumn.md",
   "PreviewInSolutionExplorer": false
 }
