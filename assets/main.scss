@@ -38,6 +38,87 @@ a.with-header-offset {
     background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
     background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.7), rgba(29, 210, 177, 0.7) 100%);
 }
+.collapse-icon-wrapper:not(.collapsed) .collapse-icon {
+    transform: rotate(180deg);
+    transition: all 250ms ease-in 0s;
+}
+.collapse-icon-wrapper.collapsed .collapse-icon {
+    transform: rotate(0deg);
+    transition: all 250ms ease-in 0s;
+}
+#SideMenu {
+    .modal-dialog {
+        height: 100%;
+        background: url(https://mdbootstrap.com/img/Photos/Others/architecture.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+        .modal-content {
+            background-color: transparent;
+
+
+            .modal-header, modal-footer {
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+
+            .modal-body {
+                background-color: transparent;
+
+                > .list-group {
+                    background-color: transparent;
+                    display: flex;
+                    flex-flow: column;
+                    height: 100%;
+
+                    > .list-group-item {
+                        background-color: rgba(255, 255, 255, 0.8);
+                        margin-bottom:0;
+                        > .list-group-item-header {
+                            background-color: transparent;
+
+                            > a {
+                                color: black;
+                            }
+
+                            & + .nested-list {
+                                background-color: rgba(0, 0, 0, 0.2);
+
+                                ul.list-group {
+                                    background-color: rgba(255, 255, 255, 0.4);
+
+                                    > li.list-group-item {
+                                        background-color: transparent;
+
+                                        &:hover {
+                                            background-color: rgba(255, 255, 255, 0.1);
+                                        }
+
+                                        &:not(:hover) > a {
+                                            color: black;
+                                        }
+
+                                        > a {
+                                            font-size: .78rem;
+                                            background-color: transparent;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &:after {
+                        content: "";
+                        flex: 1 1 auto;
+                        background-color: rgba(255, 255, 255, 0.8);
+                    }
+                }
+            }
+        }
+    }
+}
 .home-background {
     background-image: url(https://mdbootstrap.com/img/Photos/Others/architecture.jpg);
     background-repeat: no-repeat;

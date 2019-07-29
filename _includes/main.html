@@ -2,7 +2,7 @@
 {% assign ContentTopLayerSectionsLength = ContentTopLayerSections | size %}
 
 {% if ContentTopLayerSectionsLength > 0  %}
-
+{% assign  FirstSection = ContentTopLayerSections | first %}
 
 <div class="container-fluid">
     <div class="row">
@@ -25,7 +25,8 @@
                 {% assign  ContentSection = TopLayerSection %}
                 {% assign  ContentSectionName = TopLayerSectionName %}
                 {% assign  ActiveClass = ""%}
-                {% if TopLayerSection.defaultsection ==true %}
+
+                {% if TopLayerSection.title == FirstSection.title %}
                 {% assign  ActiveClass = "active show"%}
                 {% endif %}
                 <div class="tab-pane fade {{ActiveClass}}" id="{{ TopLayerSectionName }}Content" role="tabpanel" aria-labelledby="{{ TopLayerSectionName }}Tab">
