@@ -1,5 +1,5 @@
 {% assign id = include.id %}
-{% assign ClassName = include.ClassName %}
+{% assign ClassName = include.ClassName%}
 {% assign header = include.header %}
 {% assign data = include.data %}
 {% assign code = include.code %}

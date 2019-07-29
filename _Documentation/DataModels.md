@@ -7,4 +7,3 @@ nested_content: DbDataModelSections
 nestedContentType: tabs
 icon: fa-list
 ---
-This is The Data Models SectionAttributes

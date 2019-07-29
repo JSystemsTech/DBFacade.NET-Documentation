@@ -6,7 +6,7 @@ order: 1
 ---
 {% include Documentation/DataModels/Variables.md %}
 
-{% assign ClassName = 'DBColumn' %}
+{% assign ClassName = 'DbColumn' %}
 
 {% assign Constructor1 = ParamName %}
 {% assign Constructor2 = ParamDBMethodType | append: Delim1 | append: ParamName %}
