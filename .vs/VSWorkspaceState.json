@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\javascript",
-    "\\assets\\javascript\\mdb\\modules",
     "\\_DbDataModelAttributesSections",
+    "\\_Documentation",
     "\\_includes",
     "\\_includes\\Documentation",
     "\\_includes\\Documentation\\DataModels",
     "\\_layouts",
-    "\\_sass"
+    "\\_sass\\fontawesome\\scss",
+    "\\_sass\\mdb\\core"
   ],
-  "SelectedNode": "\\_DbDataModelAttributesSections\\DbEnumerableColumn.md",
+  "SelectedNode": "\\_includes\\ConstructorHeader.md",
   "PreviewInSolutionExplorer": false
 }
